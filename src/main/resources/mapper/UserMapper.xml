@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cxhello.admin.dao.UserDao">
+
+    <select id="findAllByLikeNickName" parameterType="string" resultType="com.cxhello.admin.entity.User">
+        select id,address,birthday,create_time as createTime,delete_status as deleteStatus,description,
+        email,locked,nick_name as nickName,password,sex,telephone,update_time as updateTime,user_name as userName
+        from tb_user
+        <where>
+            <if test="searchText!=null and searchText!=''">
+                nick_name like '%${searchText}%'
+            </if>
+        </where>
+    </select>
+
+</mapper>
