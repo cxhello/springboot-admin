@@ -46,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int saveOrUpdate(User user) {
-        int count;
+        int count = 0;
         if(user.getId()!=null){
             count = userDao.updateByPrimaryKeySelective(user);
         }else{

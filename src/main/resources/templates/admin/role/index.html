@@ -82,7 +82,7 @@
 			    //必须设置，不然request.getParameter获取不到请求参数
 			    contentType: "application/x-www-form-urlencoded",
 			    //获取数据的Servlet地址  
-			    url: "${ctx!}/admin/role/list",
+			    url: "/admin/role/list",
 			    //表格显示条纹  
 			    striped: true,
 			    //启动分页  
@@ -90,7 +90,7 @@
 			    //每页显示的记录数  
 			    pageSize: 10,
 			    //当前第几页  
-			    pageNumber: 1,
+			    pageNum: 1,
 			    //记录数可选列表  
 			    pageList: [5, 10, 15, 20, 25],
 			    //是否启用查询  
@@ -106,8 +106,8 @@
 			    //json数据解析
 			    responseHandler: function(res) {
 			        return {
-			            "rows": res.content,
-			            "total": res.totalElements
+			            "rows": res.list,
+			            "total": res.total
 			        };
 			    },
 			    //数据列
@@ -141,9 +141,12 @@
 			        title: "操作",
 			        field: "empty",
                     formatter: function (value, row, index) {
-                    	var operateHtml = '<@shiro.hasPermission name="system:role:edit"><button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;</@shiro.hasPermission>';
+                    	/*var operateHtml = '<@shiro.hasPermission name="system:role:edit"><button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;</@shiro.hasPermission>';
                     	operateHtml = operateHtml + '<@shiro.hasPermission name="system:role:deleteBatch"><button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button> &nbsp;</@shiro.hasPermission>';
-                    	operateHtml = operateHtml + '<@shiro.hasPermission name="system:role:grant"><button class="btn btn-info btn-xs" type="button" onclick="grant(\''+row.id+'\')"><i class="fa fa-arrows"></i>&nbsp;分配资源</button></@shiro.hasPermission>';
+                    	operateHtml = operateHtml + '<@shiro.hasPermission name="system:role:grant"><button class="btn btn-info btn-xs" type="button" onclick="grant(\''+row.id+'\')"><i class="fa fa-arrows"></i>&nbsp;分配资源</button></@shiro.hasPermission>';*/
+                        var operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
+                        operateHtml = operateHtml + '<button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button> &nbsp;';
+                        operateHtml = operateHtml + '<button class="btn btn-info btn-xs" type="button" onclick="grant(\''+row.id+'\')"><i class="fa fa-arrows"></i>&nbsp;分配资源</button>';
                         return operateHtml;
                     }
 			    }]
@@ -157,7 +160,7 @@
         	      shadeClose: true,
         	      shade: false,
         	      area: ['893px', '600px'],
-        	      content: '${ctx!}/admin/role/edit/' + id,
+        	      content: '/admin/role/edit/' + id,
         	      end: function(index){
         	    	  $('#table_list').bootstrapTable("refresh");
        	    	  }
@@ -194,12 +197,14 @@
         		$.ajax({
     	    		   type: "POST",
     	    		   dataType: "json",
-    	    		   url: "${ctx!}/admin/role/delete/" + id,
-    	    		   success: function(msg){
-	 	   	    			layer.msg(msg.message, {time: 2000},function(){
-	 	   	    				$('#table_list').bootstrapTable("refresh");
-	 	   	    				layer.close(index);
-	 	   					});
+    	    		   url: "/admin/role/delete/" + id,
+    	    		   success: function(result){
+                           if(result.code == 200) {
+                               layer.msg('删除成功', {time: 2000}, function () {
+                                   $('#table_list').bootstrapTable("refresh");
+                                   layer.close(index);
+                               });
+                           }
     	    		   }
     	    	});
        		});

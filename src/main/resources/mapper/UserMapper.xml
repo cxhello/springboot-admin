@@ -5,8 +5,8 @@
 <mapper namespace="com.cxhello.admin.dao.UserDao">
 
     <select id="findAllByLikeNickName" parameterType="string" resultType="com.cxhello.admin.entity.User">
-        select id,address,birthday,create_time as createTime,delete_status as deleteStatus,description,
-        email,locked,nick_name as nickName,password,sex,telephone,update_time as updateTime,user_name as userName
+        select id,user_name as userName,nick_name as nickName,sex,birthday,telephone,email,address,description,
+        password,delete_status as deleteStatus,locked,create_time as createTime,update_time as updateTime
         from tb_user
         <where>
             <if test="searchText!=null and searchText!=''">

@@ -18,35 +18,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @create 2019/11/9 22:47
  */
 @Controller
+@RequestMapping("/admin/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = { "/admin/user/", "/admin/user/index" })
+    @RequestMapping(value = { "/", "/index" })
     public String index() {
         return "admin/user/index";
     }
 
-    @RequestMapping("/admin/user/list")
+    @RequestMapping("/list")
     @ResponseBody
     public PageInfo<User> list(@RequestParam(value = "searchText",required = false) String searchText,PageInfo pageInfo){
         return userService.findAllByLike(searchText,pageInfo);
     }
 
-    @RequestMapping(value = "/admin/user/add")
+    @RequestMapping(value = "/add")
     public String add(Model model) {
         return "admin/user/form";
     }
 
-    @RequestMapping(value = "/admin/user/edit/{id}")
+    @RequestMapping(value = "/edit/{id}")
     public String edit(@PathVariable Integer id,Model model){
         User user = userService.selectUserById(id);
         model.addAttribute("user",user);
         return "admin/user/form";
     }
 
-    @RequestMapping(value = "/admin/user/edit")
+    @RequestMapping(value = "/edit")
     @ResponseBody
     public ResultData edit(User user){
         try {
@@ -58,7 +59,7 @@ public class UserController {
         return ResultUtils.getMsg("更新成功");
     }
 
-    @RequestMapping("/admin/user/delete/{id}")
+    @RequestMapping("/delete/{id}")
     @ResponseBody
     public ResultData delete(@PathVariable("id") Integer id){
         try {
