@@ -10,5 +10,7 @@ import com.github.pagehelper.PageInfo;
 public interface ResourceService {
     PageInfo<Resource> findAllByLike(String searchText, PageInfo pageInfo);
 
+    Resource selectResourceById(Integer id);
+
     int delete(Integer id);
 }

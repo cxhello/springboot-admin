@@ -7,6 +7,7 @@ import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,15 +29,22 @@ public class ResourceController {
         return "admin/resource/index";
     }
 
+    @RequestMapping("/list")
+    @ResponseBody
+    public PageInfo<Resource> list(@RequestParam(value = "searchText",required = false) String searchText, PageInfo pageInfo){
+        return resourceService.findAllByLike(searchText,pageInfo);
+    }
+
     @RequestMapping(value = "/add")
     public String add() {
         return "admin/resource/form";
     }
 
-    @RequestMapping("/list")
-    @ResponseBody
-    public PageInfo<Resource> list(@RequestParam(value = "searchText",required = false) String searchText, PageInfo pageInfo){
-        return resourceService.findAllByLike(searchText,pageInfo);
+    @RequestMapping(value = "/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model){
+        Resource resource = resourceService.selectResourceById(id);
+        model.addAttribute("resource",resource);
+        return "admin/resource/form";
     }
 
     @RequestMapping("/delete/{id}")

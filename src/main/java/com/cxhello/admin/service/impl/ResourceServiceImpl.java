@@ -27,6 +27,14 @@ public class ResourceServiceImpl implements ResourceService {
         PageInfo<Resource> page = new PageInfo<>(resourceList);
         return page;
     }
+
+    @Override
+    public Resource selectResourceById(Integer id) {
+        Resource resource = new Resource();
+        resource.setId(id);
+        return resourceDao.selectByPrimaryKey(resource);
+    }
+
     @Override
     public int delete(Integer id) {
         Resource resource = new Resource();
