@@ -40,7 +40,7 @@
                         <h5>资源编辑</h5>
                     </div>
                     <div class="ibox-content">
-                        <form class="form-horizontal m-t" id="frm" method="post" action="${ctx!}/admin/resource/edit">
+                        <form class="form-horizontal m-t" id="frm" method="post" action="/admin/resource/edit">
                         	<input type="hidden" id="id" name="id" value="${resource.id}">
                             <div class="form-group">
                                <label class="col-sm-3 control-label">上级资源：</label>
@@ -57,62 +57,62 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">资源名称：</label>
                                 <div class="col-sm-8">
-                                    <input id="name" name="name" class="form-control" type="text" value="${resource.name}">
+                                    <input id="name" name="name" class="form-control" type="text" th:value="${resource?.name}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">唯一标识：</label>
                                 <div class="col-sm-8">
-                                    <input id="sourceKey" name="sourceKey" class="form-control" type="text" value="${resource.sourceKey}">
+                                    <input id="sourceKey" name="sourceKey" class="form-control" type="text" th:value="${resource?.sourceKey}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">资源类型：</label>
                                 <div class="col-sm-8">
                                 	<select name="type" class="form-control">
-                                		<option value="0" <#if resource.type == 0>selected="selected"</#if>>目录</option>
-                                		<option value="1" <#if resource.type == 1>selected="selected"</#if>>菜单</option>
-                                		<option value="2" <#if resource.type == 2>selected="selected"</#if>>按钮</option>
+                                		<option value="0" th:selected="${resource?.type == 0}">目录</option>
+                                		<option value="1" th:selected="${resource?.type == 1}">菜单</option>
+                                		<option value="2" th:selected="${resource?.type == 2}">按钮</option>
                                 	</select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">资源url：</label>
                                 <div class="col-sm-8">
-                                    <input id="sourceUrl" name="sourceUrl" class="form-control" value="${resource.sourceUrl}">
+                                    <input id="sourceUrl" name="sourceUrl" class="form-control" th:value="${resource?.sourceUrl}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">层级：</label>
                                 <div class="col-sm-8">
-                                    <input id="level" name="level" class="form-control" value="${resource.level}" placeholder="目录：1，菜单：2，按钮：3">
+                                    <input id="level" name="level" class="form-control" th:value="${resource?.level}" placeholder="目录：1，菜单：2，按钮：3">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">排序：</label>
                                 <div class="col-sm-8">
-                                    <input id="sort" name="sort" class="form-control" value="${resource.sort}">
+                                    <input id="sort" name="sort" class="form-control" th:value="${resource?.sort}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">图标：</label>
                                 <div class="col-sm-8">
-                                    <input id="icon" name="icon" class="form-control" value="${resource.icon}">
+                                    <input id="icon" name="icon" class="form-control" th:value="${resource?.icon}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">状态：</label>
                                 <div class="col-sm-8">
                                 	<select name="isHide" class="form-control">
-                                		<option value="0" <#if resource.locked == 0>selected="selected"</#if>>显示</option>
-                                		<option value="1" <#if resource.locked == 1>selected="selected"</#if>>隐藏</option>
+                                		<option value="0" th:selected="${resource?.locked == 0}">显示</option>
+                                		<option value="1" th:selected="${resource?.locked == 1}">隐藏</option>
                                 	</select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">描述：</label>
                                 <div class="col-sm-8">
-                                    <input id="description" name="description" class="form-control" value="${resource.description}">
+                                    <input id="description" name="description" class="form-control" th:value="${resource?.description}">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -186,7 +186,7 @@
     	    	$.ajax({
    	    		   type: "POST",
    	    		   dataType: "json",
-   	    		   url: "${ctx!}/admin/resource/edit",
+   	    		   url: "/admin/resource/edit",
    	    		   data: $(form).serialize(),
    	    		   success: function(msg){
 	   	    			layer.msg(msg.message, {time: 2000},function(){
