@@ -47,6 +47,18 @@ public class ResourceController {
         return "admin/resource/form";
     }
 
+    @RequestMapping(value = "/edit")
+    @ResponseBody
+    public ResultData edit(Resource resource){
+        try {
+            resourceService.saveOrUpdate(resource);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtils.getMsg("系统异常,请稍后重试!");
+        }
+        return ResultUtils.getMsg("更新成功");
+    }
+
     @RequestMapping("/delete/{id}")
     @ResponseBody
     public ResultData delete(@PathVariable("id") Integer id){

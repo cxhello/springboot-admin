@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,5 +41,18 @@ public class ResourceServiceImpl implements ResourceService {
         Resource resource = new Resource();
         resource.setId(id);
         return resourceDao.delete(resource);
+    }
+
+    @Override
+    public int saveOrUpdate(Resource resource) {
+        int count = 0;
+        if(resource.getId()!=null){
+            count = resourceDao.updateByPrimaryKeySelective(resource);
+        }else{
+            resource.setCreateTime(new Date());
+            resource.setUpdateTime(new Date());
+            count = resourceDao.insertSelective(resource);
+        }
+        return count;
     }
 }
