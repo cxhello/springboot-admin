@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * @author CaiXiaoHui
  * @create 2019/11/9 23:42
@@ -43,7 +45,16 @@ public class ResourceController {
     @RequestMapping(value = "/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         Resource resource = resourceService.selectResourceById(id);
+        Resource parentResource = null;
+        if(resource.getParentId()!=null){
+            parentResource = resourceService.selectResourceById(resource.getParentId());
+        }
+        if(parentResource!=null){
+            resource.setParentResource(parentResource);
+        }
+        List<Resource> resourceList = resourceService.findAll();
         model.addAttribute("resource",resource);
+        model.addAttribute("resourceList",resourceList);
         return "admin/resource/form";
     }
 

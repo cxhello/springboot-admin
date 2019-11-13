@@ -55,4 +55,9 @@ public class ResourceServiceImpl implements ResourceService {
         }
         return count;
     }
+
+    @Override
+    public List<Resource> findAll() {
+        return resourceDao.selectAll();
+    }
 }

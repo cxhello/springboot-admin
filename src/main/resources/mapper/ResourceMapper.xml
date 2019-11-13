@@ -3,8 +3,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.cxhello.admin.dao.ResourceDao">
+    
+    <resultMap id="resourceMap" type="com.cxhello.admin.entity.Resource">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="sourceKey" column="source_key"/>
+        <result property="type" column="type"/>
+        <result property="sourceUrl" column="source_url"/>
+        <result property="level" column="level"/>
+        <result property="sort" column="sort"/>
+        <result property="icon" column="icon"/>
+        <result property="isHide" column="is_hide"/>
+        <result property="description" column="description"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+        <association property="parentResource" javaType="com.cxhello.admin.entity.Resource">
+            <id property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="sourceKey" column="source_key"/>
+            <result property="type" column="type"/>
+            <result property="sourceUrl" column="source_url"/>
+            <result property="level" column="level"/>
+            <result property="sort" column="sort"/>
+            <result property="icon" column="icon"/>
+            <result property="isHide" column="is_hide"/>
+            <result property="description" column="description"/>
+            <result property="createTime" column="create_time"/>
+            <result property="updateTime" column="update_time"/>
+            <result property="parentId" column="parent_id"/>
+        </association>
+    </resultMap>
 
-    <select id="findAllByLikeName" parameterType="string" resultType="com.cxhello.admin.entity.Resource">
+    <select id="findAllByLikeName" parameterType="string" resultMap="resourceMap">
+        select id,name,description,icon,is_hide,level,sort,source_key,
+        source_url,type,create_time,update_time,parent_id
+        from tb_resource
+        <where>
+            <if test="searchText!=null and searchText!=''">
+                name like '%${searchText}%'
+            </if>
+        </where>
+    </select>
+
+    <!--<select id="findAllByLikeName" parameterType="string" resultMap="resourceMap">
         select id,name,description,icon,is_hide as isHide,level,sort,source_key as sourceKey,
         source_url as sourceUrl,type,create_time as createTime,update_time as updateTime,
         parent_id as parentId
@@ -14,6 +55,5 @@
                 name like '%${searchText}%'
             </if>
         </where>
-    </select>
-
+    </select>-->
 </mapper>

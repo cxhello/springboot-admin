@@ -42,18 +42,22 @@
                     <div class="ibox-content">
                         <form class="form-horizontal m-t" id="frm" method="post" action="/admin/resource/edit">
                         	<input type="hidden" id="id" name="id" th:value="${resource?.id}">
-                            <!--<div class="form-group">
+                            <div class="form-group">
                                <label class="col-sm-3 control-label">上级资源：</label>
                                 <div class="col-sm-8">
-                                	<select name="parent.id" class="form-control">
+                                	<!--<select name="parent.id" class="form-control">
                                 		<#list list as r>
                                 			<option value="${r.id}" <#if resource.parent.id == r.id>selected="selected"</#if>>
                                 				<#if r.level == 1>|-<#elseif  r.level == 2>　|-<#else>　　|-</#if>${r.name}
                                 			</option>
                                 		</#list>
-                                	</select>
+                                	</select>-->
+                                    <select name="parent.id" class="form-control">
+                                        <option th:if="${resource.level==2}" th:each="r,res:${resourceList}" th:selected="${r?.id} == ${resource?.id}" th:text="${r?.name}"></option>
+                                        <option th:if="${resource.level==3}" th:each="r,res:${resourceList}" th:selected="${r?.id} == ${resource?.parentResource?.id}" th:text="${r?.name}"></option>
+                                    </select>
                                 </div>
-                            </div>-->
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">资源名称：</label>
                                 <div class="col-sm-8">
