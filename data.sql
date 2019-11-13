@@ -11,7 +11,7 @@
  Target Server Version : 50716
  File Encoding         : 65001
 
- Date: 11/11/2019 22:09:58
+ Date: 13/11/2019 21:52:38
 */
 
 SET NAMES utf8mb4;
@@ -47,7 +47,7 @@ INSERT INTO `tb_resource` VALUES (3, '用户添加', '用户添加', NULL, 0, 3,
 INSERT INTO `tb_resource` VALUES (4, '用户删除', '用户删除', NULL, 0, 3, 3, 'system:user:deleteBatch', '/admin/user/deleteBatch', 2, '2019-11-10 16:48:48', '2019-11-10 14:11:41', 1);
 INSERT INTO `tb_resource` VALUES (5, '角色分配', '角色分配', NULL, 0, 3, 4, 'system:user:grant', '/admin/user/grant/**', 2, '2019-11-10 16:48:48', '2019-11-10 14:11:51', 1);
 INSERT INTO `tb_resource` VALUES (6, '角色管理', '角色管理', NULL, 0, 2, 2, 'system:role:index', '/admin/role/index', 1, '2019-11-10 16:45:10', '2019-11-10 16:46:52', NULL);
-INSERT INTO `tb_resource` VALUES (7, '角色编辑', '角色编辑', NULL, 0, 3, 1, 'system:role:edit', '/admin/role/edit*', 2, '2019-11-10 16:47:02', '2019-11-10 10:24:06', 1);
+INSERT INTO `tb_resource` VALUES (7, '角色编辑', '角色编辑', NULL, 0, 3, 1, 'system:role:edit', '/admin/role/edit*', 2, '2019-11-10 16:47:02', '2019-11-10 10:24:06', 6);
 INSERT INTO `tb_resource` VALUES (8, '角色添加', '角色添加', NULL, 0, 3, 2, 'system:role:add', '/admin/role/add', 2, '2019-11-10 16:47:23', '2019-11-10 16:49:16', 6);
 INSERT INTO `tb_resource` VALUES (9, '角色删除', '角色删除', NULL, 0, 3, 3, 'system:role:deleteBatch', '/admin/role/deleteBatch', 2, '2019-11-10 16:47:23', '2019-11-10 14:12:03', 6);
 INSERT INTO `tb_resource` VALUES (10, '资源分配', '资源分配', NULL, 0, 3, 4, 'system:role:grant', '/admin/role/grant/**', 2, '2019-11-10 16:47:23', '2019-11-10 14:12:11', 6);
