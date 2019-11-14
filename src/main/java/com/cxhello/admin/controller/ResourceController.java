@@ -38,7 +38,9 @@ public class ResourceController {
     }
 
     @RequestMapping(value = "/add")
-    public String add() {
+    public String add(Model model) {
+        List<Resource> resourceList = resourceService.findAll();
+        model.addAttribute("resourceList", resourceList);
         return "admin/resource/form";
     }
 

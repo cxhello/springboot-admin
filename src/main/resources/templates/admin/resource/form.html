@@ -52,9 +52,13 @@
                                 			</option>
                                 		</#list>
                                 	</select>-->
-                                    <select name="parent.id" class="form-control">
-                                        <option th:if="${resource.level==2}" th:each="r,res:${resourceList}" th:selected="${r?.id} == ${resource?.id}" th:text="${r?.name}"></option>
-                                        <option th:if="${resource.level==3}" th:each="r,res:${resourceList}" th:selected="${r?.id} == ${resource?.parentResource?.id}" th:text="${r?.name}"></option>
+                                    <select name="parentId" class="form-control" th:if="${resource?.parentId==0}">
+                                        <option value="0">请选择,默认为最上级</option>
+                                        <option th:each="rel:${resourceList}" th:text="${rel?.name}" th:value="${rel?.id}" th:selected="${rel?.id} == ${resource?.id}"></option>
+                                    </select>
+                                    <select name="parentId" class="form-control" th:if="${resource?.parentId!=0}">
+                                        <option value="0">请选择,默认为最上级</option>
+                                        <option th:each="rel:${resourceList}" th:text="${rel?.name}" th:value="${rel?.id}" th:selected="${rel?.id} == ${resource?.parentResource?.id}"></option>
                                     </select>
                                 </div>
                             </div>
