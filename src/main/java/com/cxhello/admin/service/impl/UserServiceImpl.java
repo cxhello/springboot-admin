@@ -58,4 +58,12 @@ public class UserServiceImpl implements UserService {
         }
         return count;
     }
+
+    @Override
+    public User login(String username, String md5Password) {
+        User user = new User();
+        user.setUserName(username);
+        user.setPassword(md5Password);
+        return userDao.selectOne(user);
+    }
 }

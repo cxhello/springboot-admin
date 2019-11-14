@@ -16,4 +16,6 @@ public interface UserService {
     int delete(Integer id);
 
     int saveOrUpdate(User user);
+
+    User login(String username, String md5Password);
 }

@@ -45,13 +45,6 @@
                             <div class="form-group">
                                <label class="col-sm-3 control-label">上级资源：</label>
                                 <div class="col-sm-8">
-                                	<!--<select name="parent.id" class="form-control">
-                                		<#list list as r>
-                                			<option value="${r.id}" <#if resource.parent.id == r.id>selected="selected"</#if>>
-                                				<#if r.level == 1>|-<#elseif  r.level == 2>　|-<#else>　　|-</#if>${r.name}
-                                			</option>
-                                		</#list>
-                                	</select>-->
                                     <select name="parentId" class="form-control" th:if="${resource?.parentId==0}">
                                         <option value="0">请选择,默认为最上级</option>
                                         <option th:each="rel:${resourceList}" th:text="${rel?.name}" th:value="${rel?.id}" th:selected="${rel?.id} == ${resource?.id}"></option>
