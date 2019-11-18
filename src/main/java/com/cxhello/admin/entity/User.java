@@ -1,12 +1,12 @@
 package com.cxhello.admin.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author CaiXiaoHui
@@ -15,6 +15,7 @@ import java.util.Date;
 @Data
 @Table(name = "tb_user")
 public class User {
+
     /**
      * 用户id
      */
@@ -45,8 +46,6 @@ public class User {
     /**
      * 出生日期
      */
-
-    //@JSONField(format = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd",timezone="GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
@@ -94,10 +93,11 @@ public class User {
      * 更新时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
 
-    //@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
-    //@JoinTable(name = "tb_user_role", joinColumns = { @JoinColumn(name = "user_id") }, inverseJoinColumns = { @JoinColumn(name = "role_id") })
-   // private java.util.Set<Role> roles;
+    /**
+     * 用户对应的角色
+     */
+    private List<Role> roleList;
 }
