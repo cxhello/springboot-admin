@@ -18,4 +18,6 @@ public interface UserService {
     int saveOrUpdate(User user);
 
     User login(String username, String md5Password);
+
+    User selectUserByUserName(String userName);
 }

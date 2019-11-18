@@ -1,8 +1,10 @@
 package com.cxhello.admin.controller;
 
-import com.cxhello.admin.entity.User;
 import com.cxhello.admin.service.UserService;
-import com.cxhello.admin.utils.MD5Utils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +26,7 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    /*@RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(Model model, String username, String password){
         String md5Password = MD5Utils.md5(password);
         User user = userService.login(username,md5Password);
@@ -34,6 +36,19 @@ public class LoginController {
             return "login";
         }
         return "redirect:" + "/index";
+    }*/
+
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    public String login(Model model, String username, String password){
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+            subject.login(token);
+            return "redirect:" + "/index";
+        } catch (AuthenticationException e) {
+            model.addAttribute("message", e.getMessage());
+        }
+        return "login";
     }
 
     @RequestMapping(value = "/logout")

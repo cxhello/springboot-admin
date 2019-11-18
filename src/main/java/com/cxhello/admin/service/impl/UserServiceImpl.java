@@ -67,4 +67,11 @@ public class UserServiceImpl implements UserService {
         user.setPassword(md5Password);
         return userDao.selectOne(user);
     }
+
+    @Override
+    public User selectUserByUserName(String userName) {
+        User user = new User();
+        user.setUserName(userName);
+        return userDao.selectOne(user);
+    }
 }
