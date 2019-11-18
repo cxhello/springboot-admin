@@ -47,6 +47,7 @@ public class ResourceServiceImpl implements ResourceService {
     public int saveOrUpdate(Resource resource) {
         int count = 0;
         if(resource.getId()!=null){
+            resource.setUpdateTime(new Date());
             count = resourceDao.updateByPrimaryKeySelective(resource);
         }else{
             resource.setCreateTime(new Date());

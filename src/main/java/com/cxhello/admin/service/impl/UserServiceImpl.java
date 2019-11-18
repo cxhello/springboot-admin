@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
     public int saveOrUpdate(User user) {
         int count = 0;
         if(user.getId()!=null){
+            user.setUpdateTime(new Date());
             count = userDao.updateByPrimaryKeySelective(user);
         }else{
             user.setCreateTime(new Date());

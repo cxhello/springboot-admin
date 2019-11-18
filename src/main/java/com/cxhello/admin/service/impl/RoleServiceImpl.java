@@ -47,6 +47,7 @@ public class RoleServiceImpl implements RoleService {
     public int saveOrUpdate(Role role) {
         int count = 0;
         if(role.getId()!=null){
+            role.setUpdateTime(new Date());
             count = roleDao.updateByPrimaryKeySelective(role);
         }else{
             role.setCreateTime(new Date());

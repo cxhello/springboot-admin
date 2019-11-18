@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author CaiXiaoHui
@@ -53,7 +54,8 @@ public class Role {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date updateTime;
 
-    //@ManyToMany(cascade = { CascadeType.REFRESH }, fetch = FetchType.LAZY)
-    //@JoinTable(name = "tb_role_resource", joinColumns = { @JoinColumn(name = "role_id") }, inverseJoinColumns = { @JoinColumn(name = "resource_id") })
-    //private java.util.Set<Resource> resources;
+    /**
+     * 角色对应的资源
+     */
+    private List<Resource> resourceList;
 }

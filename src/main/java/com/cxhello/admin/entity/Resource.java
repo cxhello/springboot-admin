@@ -5,7 +5,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author CaiXiaoHui
@@ -81,7 +80,13 @@ public class Resource {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date updateTime;
 
+    /**
+     * 上级资源ID
+     */
     private Integer parentId;
 
+    /**
+     * 上级资源
+     */
     private Resource parentResource;
 }
