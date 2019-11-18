@@ -11,10 +11,10 @@
     <meta name="description" content="">
 
     <link rel="shortcut icon" href="favicon.ico"> 
-    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -71,17 +71,17 @@
 
 
     <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
 
     <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
+    <script src="/js/content.js?v=1.0.0"></script>
 
     <!-- jQuery Validation plugin javascript-->
-    <script src="js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="js/plugins/validate/messages_zh.min.js"></script>
-    <script src="js/plugins/layer/layer.min.js"></script>
-    <script src="js/plugins/layer/laydate/laydate.js"></script>
+    <script src="/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="/js/plugins/layer/layer.min.js"></script>
+    <script src="/js/plugins/layer/laydate/laydate.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
 	    $("#frm").validate({
@@ -91,7 +91,7 @@
     	    	$.ajax({
    	    		   type: "POST",
    	    		   dataType: "json",
-   	    		   url: "${ctx!}/admin/user/grant/" + ${user.id},
+   	    		   url: "/admin/user/grant/" + ${user.id},
    	    		   data: $(form).serialize(),
    	    		   success: function(msg){
 	   	    			layer.msg(msg.message, {time: 2000},function(){
