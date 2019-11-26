@@ -1,7 +1,10 @@
 package com.cxhello.admin.service;
 
+import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.entity.User;
 import com.github.pagehelper.PageInfo;
+
+import java.util.List;
 
 /**
  * @author CaiXiaoHui
@@ -20,4 +23,6 @@ public interface UserService {
     User login(String username, String md5Password);
 
     User selectUserByUserName(String userName);
+
+    List<Role> selectUserRoles(Integer id);
 }

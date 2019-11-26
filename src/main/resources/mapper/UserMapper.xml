@@ -64,4 +64,24 @@
         </where>
     </select>
 
+    <select id="selectUserRoles" parameterType="integer" resultType="com.cxhello.admin.entity.Role">
+        SELECT
+        ro.id as id,
+        ro.name as name,
+        ro.role_key as roleKey,
+        ro.status as status,
+        ro.description as description,
+        ro.create_time as createTime,
+        ro.update_time as updateTime
+        FROM
+        tb_user u
+        INNER JOIN tb_user_role ur ON u.id = ur.user_id
+        INNER JOIN tb_role ro ON ro.id = ur.role_id
+        <where>
+            <if test="id!=null">
+                u.id = #{id}
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -1,12 +1,14 @@
 package com.cxhello.admin.service.impl;
 
 import com.cxhello.admin.dao.UserDao;
+import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.entity.User;
 import com.cxhello.admin.service.UserService;
 import com.cxhello.admin.utils.MD5Utils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -73,5 +75,10 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUserName(userName);
         return userDao.selectOne(user);
+    }
+
+    @Override
+    public List<Role> selectUserRoles(Integer id) {
+        return userDao.selectUserRoles(id);
     }
 }

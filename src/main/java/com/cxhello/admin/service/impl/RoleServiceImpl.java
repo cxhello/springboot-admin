@@ -56,4 +56,9 @@ public class RoleServiceImpl implements RoleService {
         }
         return count;
     }
+
+    @Override
+    public List<Role> findAll() {
+        return roleDao.selectAll();
+    }
 }

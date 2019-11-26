@@ -1,6 +1,8 @@
 package com.cxhello.admin.controller;
 
+import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.entity.User;
+import com.cxhello.admin.service.RoleService;
 import com.cxhello.admin.service.UserService;
 import com.cxhello.admin.utils.ResultData;
 import com.cxhello.admin.utils.ResultUtils;
@@ -8,10 +10,10 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author CaiXiaoHui
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     @RequestMapping(value = { "/", "/index" })
     public String index() {
@@ -69,5 +74,21 @@ public class UserController {
             return ResultUtils.getFailResult();
         }
         return ResultUtils.getSuccessResult();
+    }
+
+    @RequestMapping(value = "/grant/{id}", method = RequestMethod.GET)
+    public String grant(@PathVariable Integer id, Model model) {
+        User user = userService.selectUserById(id);
+        model.addAttribute("user", user);
+        //用户拥有的角色
+        List<Role> userRoleList = userService.selectUserRoles(id);
+        List<Integer> roleIds = new ArrayList<Integer>();
+        for (Role role : userRoleList) {
+            roleIds.add(role.getId());
+        }
+        model.addAttribute("roleIds", roleIds);
+        List<Role> roleList = roleService.findAll();
+        model.addAttribute("roleList", roleList);
+        return "admin/user/grant";
     }
 }
