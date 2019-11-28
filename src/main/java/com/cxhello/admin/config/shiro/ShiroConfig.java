@@ -1,5 +1,8 @@
 package com.cxhello.admin.config.shiro;
 
+import com.cxhello.admin.entity.Resource;
+import com.cxhello.admin.service.ResourceService;
+import com.cxhello.admin.service.impl.ResourceServiceImpl;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
@@ -8,7 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -17,6 +21,11 @@ import java.util.Map;
  */
 @Configuration
 public class ShiroConfig {
+
+    @Bean
+    public ResourceService resourceService(){
+        return new ResourceServiceImpl();
+    }
 
     /**
      * 管理Shiro中一些bean的生命周期
@@ -59,7 +68,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/login");
         shiroFilterFactoryBean.setSuccessUrl("/index");
         shiroFilterFactoryBean.setUnauthorizedUrl("/previlige/no");
-        Map<String, String> filterChainDefinitionMap = new HashMap<String, String>();
+        Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
         //允许访问静态资源
         filterChainDefinitionMap.put("/css/**", "anon");
         filterChainDefinitionMap.put("/fonts/**", "anon");
@@ -67,6 +76,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/js/**", "anon");
         //登录路径
         filterChainDefinitionMap.put("/login", "anon");
+        List<Resource> resourceList = resourceService().findAll();
+        for (Resource resource : resourceList) {
+            filterChainDefinitionMap.put(resource.getSourceUrl(), "perms[" + resource.getSourceKey() + "]");
+        }
         //过滤连接自定义，从上往下顺序执行，所以用/**放在最下边
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
