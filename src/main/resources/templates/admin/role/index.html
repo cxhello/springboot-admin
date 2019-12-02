@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -31,10 +31,8 @@
                         <h5>角色管理</h5>
                     </div>
                     <div class="ibox-content">
-                        <p>
-                        <!--<@shiro.hasPermission name="system:role:add">-->
+                        <p shiro:hasPermission="system:role:add">
                         	<button class="btn btn-success " type="button" onclick="add();"><i class="fa fa-plus"></i>&nbsp;添加</button>
-                        <!--</@shiro.hasPermission>-->
                         </p>
                         <hr>
                         <div class="row row-lg">
@@ -53,6 +51,22 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var hasEditPermission = false;
+        var hasDeleteBatchPermission = false;
+        var hasGrantPermission = false;
+    </script>
+
+    <shiro:hasPermission name="system:role:edit">
+        <script>hasEditPermission=true</script>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="system:role:deleteBatch">
+        <script>hasDeleteBatchPermission=true</script>
+    </shiro:hasPermission>
+    <shiro:hasPermission name="system:role:grant">
+        <script>hasGrantPermission=true</script>
+    </shiro:hasPermission>
 
     <!-- 全局js -->
     <script src="/js/jquery.min.js?v=2.1.4"></script>
@@ -141,12 +155,16 @@
 			        title: "操作",
 			        field: "empty",
                     formatter: function (value, row, index) {
-                    	/*var operateHtml = '<@shiro.hasPermission name="system:role:edit"><button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;</@shiro.hasPermission>';
-                    	operateHtml = operateHtml + '<@shiro.hasPermission name="system:role:deleteBatch"><button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button> &nbsp;</@shiro.hasPermission>';
-                    	operateHtml = operateHtml + '<@shiro.hasPermission name="system:role:grant"><button class="btn btn-info btn-xs" type="button" onclick="grant(\''+row.id+'\')"><i class="fa fa-arrows"></i>&nbsp;分配资源</button></@shiro.hasPermission>';*/
-                        var operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
-                        operateHtml = operateHtml + '<button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button> &nbsp;';
-                        operateHtml = operateHtml + '<button class="btn btn-info btn-xs" type="button" onclick="grant(\''+row.id+'\')"><i class="fa fa-arrows"></i>&nbsp;分配资源</button>';
+                        var operateHtml = '';
+                        if(hasEditPermission){
+                            operateHtml = '<button class="btn btn-primary btn-xs" type="button" onclick="edit(\''+row.id+'\')"><i class="fa fa-edit"></i>&nbsp;修改</button> &nbsp;';
+                        }
+                        if(hasDeleteBatchPermission){
+                            operateHtml = operateHtml + '<button class="btn btn-danger btn-xs" type="button" onclick="del(\''+row.id+'\')"><i class="fa fa-remove"></i>&nbsp;删除</button> &nbsp;';
+                        }
+                        if(hasGrantPermission){
+                            operateHtml = operateHtml + '<button class="btn btn-info btn-xs" type="button" onclick="grant(\''+row.id+'\')"><i class="fa fa-arrows"></i>&nbsp;分配资源</button>';
+                        }
                         return operateHtml;
                     }
 			    }]

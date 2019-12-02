@@ -1,5 +1,6 @@
 package com.cxhello.admin.config.shiro;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.cxhello.admin.entity.Resource;
 import com.cxhello.admin.service.ResourceService;
 import com.cxhello.admin.service.impl.ResourceServiceImpl;
@@ -84,5 +85,13 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
+    }
+
+    /**
+     * 配置ShiroDialect，用于thymeleaf和shiro标签配合使用
+     */
+    @Bean
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
     }
 }

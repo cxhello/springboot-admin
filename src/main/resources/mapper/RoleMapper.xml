@@ -14,4 +14,30 @@
         </where>
     </select>
 
+    <select id="selectRoleResources" parameterType="integer" resultType="com.cxhello.admin.entity.Resource">
+        SELECT
+        re.id as id,
+        re.name as name,
+        re.description as description,
+        re.icon as icon,
+        re.is_hide as isHide,
+        re.level as level,
+        re.sort as sort,
+        re.source_key as sourceKey,
+        re.source_url as sourceUrl,
+        re.type as type,
+        re.create_time as createTime,
+        re.update_time as updateTime,
+        re.parent_id as parentId
+        FROM
+        tb_role ro
+        INNER JOIN tb_role_resource rr ON ro.id = rr.role_id
+        INNER JOIN tb_resource re ON re.id = rr.resource_id
+        <where>
+            <if test="id!=null">
+                ro.id = #{id}
+            </if>
+        </where>
+    </select>
+
 </mapper>

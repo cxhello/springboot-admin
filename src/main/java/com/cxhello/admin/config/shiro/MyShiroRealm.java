@@ -1,6 +1,9 @@
 package com.cxhello.admin.config.shiro;
 
+import com.cxhello.admin.entity.Resource;
+import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.entity.User;
+import com.cxhello.admin.service.RoleService;
 import com.cxhello.admin.service.UserService;
 import com.cxhello.admin.utils.MD5Utils;
 import org.apache.shiro.authc.*;
@@ -9,6 +12,10 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @author CaiXiaoHui
@@ -19,11 +26,31 @@ public class MyShiroRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         User queryUser = (User) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         User user = userService.selectUserByUserName(queryUser.getUserName());
+        Set<String> shiroPermissions = new HashSet<>();
+        Set<String> roleSet = new HashSet<String>();
+        List<Role> userRoles = userService.selectUserRoles(user.getId());
+        if(userRoles!=null && userRoles.size()>0){
+            for (Role role : userRoles) {
+                List<Resource> roleResources = roleService.selectRoleResources(role.getId());
+                if(roleResources != null && roleResources.size()>0){
+                    for (Resource resource : roleResources) {
+                        shiroPermissions.add(resource.getSourceKey());
+                    }
+
+                }
+                roleSet.add(role.getRoleKey());
+            }
+        }
+        authorizationInfo.setRoles(roleSet);
+        authorizationInfo.setStringPermissions(shiroPermissions);
         return authorizationInfo;
     }
 

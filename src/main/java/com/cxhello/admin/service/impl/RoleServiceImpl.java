@@ -1,6 +1,7 @@
 package com.cxhello.admin.service.impl;
 
 import com.cxhello.admin.dao.RoleDao;
+import com.cxhello.admin.entity.Resource;
 import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.service.RoleService;
 import com.github.pagehelper.PageHelper;
@@ -60,5 +61,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> findAll() {
         return roleDao.selectAll();
+    }
+
+    @Override
+    public List<Resource> selectRoleResources(Integer id) {
+        return roleDao.selectRoleResources(id);
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="utf-8">
@@ -60,23 +60,17 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <!--<@shiro.hasPermission name="system:user:index">-->
-                        <li>
+                        <li shiro:hasPermission="system:user:index">
                             <a class="J_menuItem" href="admin/user/index">用户管理</a>
                         </li>
-                    <!--</@shiro.hasPermission>-->
-                    <!--<@shiro.hasPermission name="system:role:index">-->
-                <li>
-                    <a class="J_menuItem" href="admin/role/index">角色管理</a>
+                        <li shiro:hasPermission="system:role:index">
+                            <a class="J_menuItem" href="admin/role/index">角色管理</a>
+                        </li>
+                        <li shiro:hasPermission="system:resource:index">
+                            <a class="J_menuItem" href="admin/resource/index">资源管理</a>
+                        </li>
+                    </ul>
                 </li>
-            <!--</@shiro.hasPermission>-->
-            <!--<@shiro.hasPermission name="system:resource:index">-->
-            <li>
-                <a class="J_menuItem" href="admin/resource/index">资源管理</a>
-            </li>
-        <!--</@shiro.hasPermission>-->
-        </ul>
-        </li>
         <li class="line dk"></li>
         </ul>
 </div>
