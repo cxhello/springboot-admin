@@ -26,17 +26,22 @@ public class LoginController {
         return "login";
     }
 
-    /*@RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(Model model, String username, String password){
-        String md5Password = MD5Utils.md5(password);
-        User user = userService.login(username,md5Password);
-        boolean flag = user==null ? true : false;
-        if (flag) {
-            model.addAttribute("message","用户不存在或者密码不正确！");
-            return "login";
-        }
-        return "redirect:" + "/index";
-    }*/
+//    @RequestMapping(value = "/login",method = RequestMethod.POST)
+//    public String login(Model model, String username, String password){
+//        String md5Password = MD5Utils.md5(password);
+//        User user = userService.login(username,md5Password);
+//        boolean flag = user==null ? true : false;
+//        if (flag) {
+//            model.addAttribute("message","用户不存在或者密码不正确！");
+//            return "login";
+//        }
+//        return "redirect:" + "/index";
+//    }
+
+//    @RequestMapping(value = "/logout")
+//    public String logout() {
+//        return "redirect:" + "/login";
+//    }
 
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(Model model, String username, String password){
@@ -53,6 +58,8 @@ public class LoginController {
 
     @RequestMapping(value = "/logout")
     public String logout() {
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         return "redirect:" + "/login";
     }
 

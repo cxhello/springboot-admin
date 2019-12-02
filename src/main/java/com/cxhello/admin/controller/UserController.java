@@ -7,6 +7,8 @@ import com.cxhello.admin.service.UserService;
 import com.cxhello.admin.utils.ResultData;
 import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -91,4 +93,27 @@ public class UserController {
         model.addAttribute("roleList", roleList);
         return "admin/user/grant";
     }
+
+    @RequestMapping(value = "/updatePwd", method = RequestMethod.GET)
+    public String updatePwd() {
+        return "admin/user/updatePwd";
+    }
+
+    @RequestMapping(value = "/updatePwd", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultData updatePwd(String oldPassword, String password1, String password2){
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            Object principal = subject.getPrincipal();
+            if(principal== null){
+                return ResultUtils.getMsg("您尚未登录");
+            }
+            userService.updatePwd((User)principal,oldPassword,password1,password2);
+            return ResultUtils.getSuccessResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultUtils.getResult(400,e.getMessage());
+        }
+    }
+
 }

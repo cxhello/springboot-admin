@@ -12,10 +12,10 @@
     <meta name="description" content="">
 
     <link rel="shortcut icon" href="favicon.ico"> 
-    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="/css/animate.css" rel="stylesheet">
+    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
 
 </head>
 
@@ -40,7 +40,7 @@
                         <h5>完整验证表单</h5>
                     </div>
                     <div class="ibox-content">
-                        <form class="form-horizontal m-t" id="frm" method="post" action="${ctx!}/admin/user/updatePwd">
+                        <form class="form-horizontal m-t" id="frm" method="post" action="/admin/user/updatePwd">
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">原始密码：</label>
                                 <div class="col-sm-8">
@@ -74,16 +74,16 @@
 
 
     <!-- 全局js -->
-    <script src="js/jquery.min.js?v=2.1.4"></script>
-    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="/js/jquery.min.js?v=2.1.4"></script>
+    <script src="/js/bootstrap.min.js?v=3.3.6"></script>
 
     <!-- 自定义js -->
-    <script src="js/content.js?v=1.0.0"></script>
+    <script src="/js/content.js?v=1.0.0"></script>
 
     <!-- jQuery Validation plugin javascript-->
-    <script src="js/plugins/validate/jquery.validate.min.js"></script>
-    <script src="js/plugins/validate/messages_zh.min.js"></script>
-    <script src="js/plugins/layer/layer.min.js"></script>
+    <script src="/js/plugins/validate/jquery.validate.min.js"></script>
+    <script src="/js/plugins/validate/messages_zh.min.js"></script>
+    <script src="/js/plugins/layer/layer.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
 	    $("#frm").validate({
@@ -109,16 +109,19 @@
     	    	$.ajax({
    	    		   type: "POST",
    	    		   dataType: "json",
-   	    		   url: "${ctx!}/admin/user/updatePwd",
+   	    		   url: "/admin/user/updatePwd",
    	    		   data: $(form).serialize(),
-   	    		   success: function(msg){
-   	    		   		if(msg.code ==0){
-   	    		   			window.location.href = "${ctx!}/admin/logout";
+   	    		   success: function(result){
+   	    		   		if(result.code == 200){
+                            layer.msg("修改成功", {time: 2000},function(){
+                                var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                                parent.layer.close(index);
+                            });
+                            window.location.href = "/logout";
    	    		   		}
-	   	    			layer.msg(msg.message, {time: 2000},function(){
-	   						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-	   						parent.layer.close(index); 
-	   					});
+   	    		   		if(result.code == 400){
+   	    		   		    layer.msg(result.msg);
+                        }
    	    		   }
    	    		});
             } 

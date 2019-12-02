@@ -25,4 +25,6 @@ public interface UserService {
     User selectUserByUserName(String userName);
 
     List<Role> selectUserRoles(Integer id);
+
+    void updatePwd(User user, String oldPassword, String password1, String password2);
 }
