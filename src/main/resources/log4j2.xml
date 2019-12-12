@@ -3,9 +3,6 @@
     <properties>
         <!-- 应用名称：和统一配置中的项目代码保持一致（小写） -->
         <property name="APP_NAME" value="springboot-admin" />
-        <!-- 日志文件保留天数 -->
-        <property name="LOG_MAX_HISTORY" value="30" />
-        <!-- 定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
         <!-- 应用日志文件保存路径 -->
         <property name="LOG_HOME" value="/export/Logs/${APP_NAME}" />
         <property name="patternLayout">%-d{yyyy-MM-dd HH:mm:ss} [%p] [%t] - %c.%M():%L - %m%n</property>
@@ -36,6 +33,56 @@
             </Policies>
             <DefaultRolloverStrategy max="5"/>
         </RollingFile>
+
+        <RollingFile name="druidSql" fileName="${LOG_HOME}/druidSql.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="shiro" fileName="${LOG_HOME}/shiro.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="hibernate" fileName="${LOG_HOME}/hibernate.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="thymeleaf" fileName="${LOG_HOME}/thymeleaf.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="mybatis" fileName="${LOG_HOME}/mybatis.log"
+                     filePattern="${log_home}/$${date:yyyy-MM-dd}/mybatis-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
@@ -49,6 +96,34 @@
 
         <Logger name="com.cxhello.admin.dao" level="Debug">
             <AppenderRef ref="sql"/>
+        </Logger>
+
+        <Logger name="druid.sql" level="Error">
+            <AppenderRef ref="druidSql"/>
+        </Logger>
+
+        <Logger name="org.apache.shiro" level="Error">
+            <AppenderRef ref="shiro"/>
+        </Logger>
+
+        <Logger name="org.hibernate.validator" level="Error">
+            <AppenderRef ref="hibernate"/>
+        </Logger>
+
+        <Logger name="org.thymeleaf" level="info">
+            <AppenderRef ref="thymeleaf"/>
+        </Logger>
+
+        <Logger name="org.apache.ibatis" level="info" additivity="false">
+            <AppenderRef ref="mybatis"/>
+        </Logger>
+
+        <Logger name="org.mybatis.spring" level="info" additivity="false">
+            <AppenderRef ref="mybatis"/>
+        </Logger>
+
+        <Logger name="tk.mybatis" level="Debug" additivity="false">
+            <AppenderRef ref="mybatis"/>
         </Logger>
     </Loggers>
 </Configuration>
