@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <properties>
+        <!-- 应用名称：和统一配置中的项目代码保持一致（小写） -->
+        <property name="APP_NAME" value="springboot-admin" />
+        <!-- 日志文件保留天数 -->
+        <property name="LOG_MAX_HISTORY" value="30" />
+        <!-- 定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
+        <!-- 应用日志文件保存路径 -->
+        <property name="LOG_HOME" value="/export/Logs/${APP_NAME}" />
+        <property name="patternLayout">%-d{yyyy-MM-dd HH:mm:ss} [%p] [%t] - %c.%M():%L - %m%n</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${patternLayout}"/>
+        </Console>
+
+        <RollingFile name="spring" fileName="${LOG_HOME}/spring.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/spring-%d{yyyyMMdd}-%i.log.gz">
+            <!-- 输出格式，不设置默认为:%m%n. -->
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="sql" fileName="${LOG_HOME}/sql.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Root level="DEBUG">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+        <Logger name="org.springframework" level="Error">
+            <AppenderRef ref="spring"/>
+        </Logger>
+
+        <Logger name="com.cxhello.admin.dao" level="Debug">
+            <AppenderRef ref="sql"/>
+        </Logger>
+    </Loggers>
+</Configuration>
