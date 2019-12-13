@@ -1,7 +1,7 @@
 package com.cxhello.admin;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import tk.mybatis.spring.annotation.MapperScan;
@@ -10,7 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @MapperScan("com.cxhello.admin.dao")
 public class SpringbootAdminApplication {
 
-    private static Logger logger = LoggerFactory.getLogger(SpringbootAdminApplication.class);
+    private static final Logger logger = LogManager.getLogger(SpringbootAdminApplication.class);
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootAdminApplication.class, args);
