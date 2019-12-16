@@ -90,40 +90,40 @@
             <AppenderRef ref="Console"/>
         </Root>
 
-        <AsyncLogger name="org.springframework" level="Error">
+        <Logger name="org.springframework" level="Error">
             <AppenderRef ref="spring"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="com.cxhello.admin.dao" level="Debug">
+        <Logger name="com.cxhello.admin.dao" level="Debug">
             <AppenderRef ref="sql"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="druid.sql" level="Error">
+        <Logger name="druid.sql" level="Error">
             <AppenderRef ref="druidSql"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="org.apache.shiro" level="Error">
+        <Logger name="org.apache.shiro" level="Error">
             <AppenderRef ref="shiro"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="org.hibernate.validator" level="Error">
+        <Logger name="org.hibernate.validator" level="Error">
             <AppenderRef ref="hibernate"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="org.thymeleaf" level="info">
+        <Logger name="org.thymeleaf" level="info">
             <AppenderRef ref="thymeleaf"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="org.apache.ibatis" level="info" additivity="false">
+        <Logger name="org.apache.ibatis" level="info" additivity="false">
             <AppenderRef ref="mybatis"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="org.mybatis.spring" level="info" additivity="false">
+        <Logger name="org.mybatis.spring" level="info" additivity="false">
             <AppenderRef ref="mybatis"/>
-        </AsyncLogger>
+        </Logger>
 
-        <AsyncLogger name="tk.mybatis" level="Debug" additivity="false">
+        <Logger name="tk.mybatis" level="Debug" additivity="false">
             <AppenderRef ref="mybatis"/>
-        </AsyncLogger>
+        </Logger>
     </Loggers>
 </Configuration>
