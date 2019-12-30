@@ -17,6 +17,7 @@
         <result property="address" column="address"/>
         <result property="deleteStatus" column="delete_status"/>
         <result property="locked" column="locked"/>
+        <result property="description" column="description"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
         <collection property="roleList" ofType="com.cxhello.admin.entity.Role">
@@ -44,6 +45,7 @@
         u.password,
         u.delete_status,
         u.locked,
+        u.description,
         u.create_time,
         u.update_time,
         ro.id,
