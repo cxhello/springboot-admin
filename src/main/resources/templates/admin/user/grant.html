@@ -42,12 +42,12 @@
                         <form class="form-horizontal" id="frm" method="post" action="/admin/user/save">
                         	<input type="hidden" id="id" name="id" value="${user.id}">
                         	<div class="form-group">
-                                <div class="col-sm-12" th:each="role,roleStat : ${roleList}">
-                                    <div class="checkbox i-checks" th:each="id,roleIdsStat : ${roleIds}">
-                                        <label th:if="${id} == ${role.id}">
+                                <div class="col-sm-12">
+                                    <div class="checkbox i-checks" th:switch="${roleList} != null" th:each="role,roleStat : ${roleList}">
+                                        <label th:case="${#strings.contains(roleIds,role.id)}">
                                             <input type="checkbox" value="${role.id}" name="roleIds" th:checked="checked"> <i></i> [[${role.name}]]
                                         </label>
-                                        <label th:if="${id} != ${role.id}">
+                                        <label th:case="*">
                                             <input type="checkbox" value="${role.id}" name="roleIds"> <i></i> [[${role.name}]]
                                         </label>
                                     </div>

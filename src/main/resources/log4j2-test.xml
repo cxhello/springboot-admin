@@ -75,7 +75,7 @@
         </RollingFile>
 
         <RollingFile name="mybatis" fileName="${LOG_HOME}/mybatis.log"
-                     filePattern="${log_home}/$${date:yyyy-MM-dd}/mybatis-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/mybatis-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>

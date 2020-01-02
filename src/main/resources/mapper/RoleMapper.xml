@@ -9,7 +9,7 @@
         from tb_role
         <where>
             <if test="searchText!=null and searchText!=''">
-                name like '%${searchText}%'
+                name like concat ('%',#{searchText},'%')
             </if>
         </where>
     </select>

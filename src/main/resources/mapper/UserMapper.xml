@@ -61,7 +61,7 @@
         LEFT JOIN tb_role ro ON ro.id = ur.role_id
         <where>
             <if test="searchText!=null and searchText!=''">
-                u.nick_name like '%${searchText}%'
+                u.nick_name like concat ('%',#{searchText},'%')
             </if>
         </where>
     </select>

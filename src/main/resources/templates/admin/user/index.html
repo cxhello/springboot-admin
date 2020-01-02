@@ -139,6 +139,9 @@
 			        formatter: function(value, row, index) {
                     	var r = "";
                     	$(value).each(function (index,role){
+                    	    if(role.name == null){
+                    	        return r;
+                            }
                     		r = r + "【" + role.name + "】";
                     	});
                     	return r;
