@@ -16,4 +16,8 @@ public interface UserDao extends Mapper<User> {
     List<User> findAllByLikeNickName(@Param("searchText") String searchText);
 
     List<Role> selectUserRoles(@Param("id") Integer id);
+
+    void grant(@Param("userId") Integer id, @Param("roleId")Integer rid);
+
+    void deleteUserRoles(Integer id);
 }

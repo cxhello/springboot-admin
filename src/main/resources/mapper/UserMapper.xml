@@ -86,4 +86,13 @@
         </where>
     </select>
 
+    <insert id="grant">
+        insert into tb_user_role (user_id,role_id) values (#{userId},#{roleId})
+    </insert>
+
+    <delete id="deleteUserRoles" parameterType="integer">
+        delete from tb_user_role where user_id = #{id}
+    </delete>
+
+
 </mapper>

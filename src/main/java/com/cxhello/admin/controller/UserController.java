@@ -94,6 +94,18 @@ public class UserController {
         return "admin/user/grant";
     }
 
+    @RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultData grant(@PathVariable Integer id, String[] roleIds) {
+        try{
+            userService.grant(id,roleIds);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultUtils.getMsg(e.getMessage());
+        }
+        return ResultUtils.getMsg("操作成功");
+    }
+
     @RequestMapping(value = "/updatePwd", method = RequestMethod.GET)
     public String updatePwd() {
         return "admin/user/updatePwd";

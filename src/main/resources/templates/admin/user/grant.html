@@ -45,10 +45,10 @@
                                 <div class="col-sm-12">
                                     <div class="checkbox i-checks" th:switch="${roleList} != null" th:each="role,roleStat : ${roleList}">
                                         <label th:case="${#strings.contains(roleIds,role.id)}">
-                                            <input type="checkbox" value="${role.id}" name="roleIds" th:checked="checked"> <i></i> [[${role.name}]]
+                                            <input type="checkbox" th:value="${role.id}" name="roleIds" th:checked="checked"> <i></i> [[${role.name}]]
                                         </label>
                                         <label th:case="*">
-                                            <input type="checkbox" value="${role.id}" name="roleIds"> <i></i> [[${role.name}]]
+                                            <input type="checkbox" th:value="${role.id}" name="roleIds"> <i></i> [[${role.name}]]
                                         </label>
                                     </div>
                                 </div>
@@ -88,12 +88,12 @@
     	    	$.ajax({
    	    		   type: "POST",
    	    		   dataType: "json",
-   	    		   url: "/admin/user/grant/" + ${user.id},
+   	    		   url: "/admin/user/grant/" + [[${user.id}]],
    	    		   data: $(form).serialize(),
-   	    		   success: function(msg){
-	   	    			layer.msg(msg.message, {time: 2000},function(){
+   	    		   success: function(result){
+	   	    			layer.msg(result.msg, {time: 2000},function(){
 	   						var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
-	   						parent.layer.close(index); 
+	   						parent.layer.close(index);
 	   					});
    	    		   }
    	    		});

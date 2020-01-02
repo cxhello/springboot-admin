@@ -9,6 +9,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.Date;
@@ -96,5 +97,23 @@ public class UserServiceImpl implements UserService {
         Assert.isTrue(password1.equals(password2), "两次密码不一致");
         existUser.setPassword(MD5Utils.md5(password2));
         userDao.updateByPrimaryKeySelective(existUser);
+    }
+
+    @Override
+    @Transactional
+    public void grant(Integer id, String[] roleIds) {
+        User user = selectUserById(id);
+        Assert.notNull(user, "用户不存在");
+        Assert.state(!"admin".equals(user.getUserName()),"超级管理员用户不能修改管理角色");
+        List<Role> userRoles = selectUserRoles(id);
+        if(userRoles != null && userRoles.size() >0){
+            userDao.deleteUserRoles(id);
+        }
+        if(roleIds != null && roleIds.length > 0){
+            for (String roleId : roleIds) {
+                Integer rid = Integer.parseInt(roleId);
+                userDao.grant(user.getId(),rid);
+            }
+        }
     }
 }
