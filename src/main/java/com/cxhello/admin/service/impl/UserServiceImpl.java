@@ -29,6 +29,12 @@ public class UserServiceImpl implements UserService {
     public PageInfo<User> findAllByLike(String searchText, PageInfo pageInfo) {
         PageHelper.startPage(pageInfo.getPageNum(),pageInfo.getPageSize());
         List<User> userList = userDao.findAllByLikeNickName(searchText);
+        for (User user : userList) {
+            List<Role> userRoles = selectUserRoles(user.getId());
+            if(userRoles != null && userRoles.size()>0){
+                user.setRoleList(userRoles);
+            }
+        }
         PageInfo<User> page = new PageInfo<>(userList);
         return page;
     }

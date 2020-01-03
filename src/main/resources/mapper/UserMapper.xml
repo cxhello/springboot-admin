@@ -20,48 +20,29 @@
         <result property="description" column="description"/>
         <result property="createTime" column="create_time"/>
         <result property="updateTime" column="update_time"/>
-        <collection property="roleList" ofType="com.cxhello.admin.entity.Role">
-            <id property="id" column="id"/>
-            <result property="name" column="name"/>
-            <result property="roleKey" column="role_key"/>
-            <result property="status" column="status"/>
-            <result property="description" column="description"/>
-            <result property="createTime" column="create_time"/>
-            <result property="updateTime" column="update_time"/>
-        </collection>
     </resultMap>
 
     <select id="findAllByLikeNickName" parameterType="string" resultMap="userResultMap">
         SELECT
-        u.id,
-        u.user_name,
-        u.nick_name,
-        u.sex,
-        u.birthday,
-        u.telephone,
-        u.email,
-        u.address,
-        u.description,
-        u.password,
-        u.delete_status,
-        u.locked,
-        u.description,
-        u.create_time,
-        u.update_time,
-        ro.id,
-        ro.name,
-        ro.role_key,
-        ro.status,
-        ro.description,
-        ro.create_time,
-        ro.update_time
-        FROM
-        tb_user u
-        LEFT JOIN tb_user_role ur ON u.id = ur.user_id
-        LEFT JOIN tb_role ro ON ro.id = ur.role_id
+        id,
+        user_name,
+        nick_name,
+        sex,
+        birthday,
+        telephone,
+        email,
+        address,
+        description,
+        password,
+        delete_status,
+        locked,
+        description,
+        create_time,
+        update_time
+        FROM tb_user
         <where>
             <if test="searchText!=null and searchText!=''">
-                u.nick_name like concat ('%',#{searchText},'%')
+                nick_name like concat ('%',#{searchText},'%')
             </if>
         </where>
     </select>

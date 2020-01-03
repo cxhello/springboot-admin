@@ -5,6 +5,8 @@ import com.cxhello.admin.service.ResourceService;
 import com.cxhello.admin.utils.ResultData;
 import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/resource")
 public class ResourceController {
+
+    private static final Logger logger = LogManager.getLogger(ResourceController.class);
 
     @Autowired
     private ResourceService resourceService;
@@ -66,7 +70,7 @@ public class ResourceController {
         try {
             resourceService.saveOrUpdate(resource);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getMsg("系统异常,请稍后重试!");
         }
         return ResultUtils.getMsg("更新成功");
@@ -78,7 +82,7 @@ public class ResourceController {
         try {
             resourceService.delete(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getFailResult();
         }
         return ResultUtils.getSuccessResult();

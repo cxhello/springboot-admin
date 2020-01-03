@@ -7,6 +7,8 @@ import com.cxhello.admin.service.UserService;
 import com.cxhello.admin.utils.ResultData;
 import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/user")
 public class UserController {
+
+    private static final Logger logger = LogManager.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -60,7 +64,7 @@ public class UserController {
         try {
             userService.saveOrUpdate(user);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getMsg("系统异常,请稍后重试!");
         }
         return ResultUtils.getMsg("更新成功");
@@ -72,7 +76,7 @@ public class UserController {
         try {
             userService.delete(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getFailResult();
         }
         return ResultUtils.getSuccessResult();
@@ -100,7 +104,7 @@ public class UserController {
         try{
             userService.grant(id,roleIds);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getMsg(e.getMessage());
         }
         return ResultUtils.getMsg("操作成功");
@@ -123,7 +127,7 @@ public class UserController {
             userService.updatePwd((User)principal,oldPassword,password1,password2);
             return ResultUtils.getSuccessResult();
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getResult(400,e.getMessage());
         }
     }

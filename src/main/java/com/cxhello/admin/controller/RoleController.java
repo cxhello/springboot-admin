@@ -5,6 +5,8 @@ import com.cxhello.admin.service.RoleService;
 import com.cxhello.admin.utils.ResultData;
 import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("/admin/role")
 public class RoleController {
+
+    private static final Logger logger = LogManager.getLogger(RoleController.class);
 
     @Autowired
     private RoleService roleService;
@@ -53,7 +57,7 @@ public class RoleController {
         try {
             roleService.saveOrUpdate(role);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getMsg("系统异常,请稍后重试!");
         }
         return ResultUtils.getMsg("更新成功");
@@ -65,7 +69,7 @@ public class RoleController {
         try {
             roleService.delete(id);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
             return ResultUtils.getFailResult();
         }
         return ResultUtils.getSuccessResult();
