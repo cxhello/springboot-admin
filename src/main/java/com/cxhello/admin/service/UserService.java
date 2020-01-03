@@ -13,7 +13,7 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * 根据关键字分页查询
+     * 根据关键字分页查询用户
      * @param searchText
      * @param pageInfo
      * @return
