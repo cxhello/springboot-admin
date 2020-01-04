@@ -1,6 +1,7 @@
 package com.cxhello.admin.service;
 
 import com.cxhello.admin.entity.Resource;
+import com.cxhello.admin.vo.ZtreeView;
 import com.github.pagehelper.PageInfo;
 
 import java.util.List;
@@ -45,4 +46,11 @@ public interface ResourceService {
      * @return
      */
     List<Resource> findAll();
+
+    /**
+     * 获取角色的权限树
+     * @param roleId
+     * @return
+     */
+    List<ZtreeView> getPermissionTreeByRole(Integer roleId);
 }

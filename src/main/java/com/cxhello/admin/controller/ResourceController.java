@@ -4,6 +4,7 @@ import com.cxhello.admin.entity.Resource;
 import com.cxhello.admin.service.ResourceService;
 import com.cxhello.admin.utils.ResultData;
 import com.cxhello.admin.utils.ResultUtils;
+import com.cxhello.admin.vo.ZtreeView;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -86,5 +87,12 @@ public class ResourceController {
             return ResultUtils.getFailResult();
         }
         return ResultUtils.getSuccessResult();
+    }
+
+    @RequestMapping("/tree/{roleId}")
+    @ResponseBody
+    public List<ZtreeView> tree(@PathVariable Integer roleId){
+        List<ZtreeView> list = resourceService.getPermissionTreeByRole(roleId);
+        return list;
     }
 }

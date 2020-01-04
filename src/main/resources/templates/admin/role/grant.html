@@ -29,7 +29,7 @@
                         <h5>jQuery Validate 简介</h5>
                     </div>
                     <div class="ibox-content">
-                        <p>为【${role.name}】分配资源</p>
+                        <p>为【[[${role.name}]]】分配资源</p>
                     </div>
                 </div>
             </div>
@@ -85,10 +85,10 @@
 	$(document).ready(function() {
 		$.ajax({
 			type : "POST",
-			url : "/admin/resource/tree/" + ${role.id},
+			url : "/admin/resource/tree/" + [[${role.id}]],
 			dataType : 'json',
-			success : function(msg) {
-				$.fn.zTree.init($("#tree"), setting, msg);
+			success : function(result) {
+				$.fn.zTree.init($("#tree"), setting, result);
 			}
 		});
 		
@@ -101,7 +101,7 @@
 				selectIds+=item.id+",";
 			} 
 			$.ajax({
-				url : "/admin/role/grant/" + ${role.id} + "?t=Math.random()",
+				url : "/admin/role/grant/" + [[${role.id}]] + "?t=Math.random()",
 				type : "post",
 				dataType : "json",
 				data : {"resourceIds":selectIds},
