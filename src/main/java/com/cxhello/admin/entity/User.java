@@ -20,7 +20,6 @@ public class User {
      * 用户id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**

@@ -18,7 +18,6 @@ public class Resource {
      * 资源id
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
