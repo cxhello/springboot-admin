@@ -83,13 +83,14 @@ public class ResourceServiceImpl implements ResourceService {
             role.setResourceList(allRoleResourceList);
         }
         List<ZtreeView> ztreeViewList = new ArrayList<>();
+        ztreeViewList.add(0,new ZtreeView(0L, null, "系统菜单", true));
         for (Resource resource : allResourceList) {
             ZtreeView ztreeView = new ZtreeView();
             ztreeView.setId(Long.valueOf(resource.getId()));
             if (resource.getParentResource() == null) {
-                ztreeView.setpId(0L);
+                ztreeView.setPId(0L);
             } else {
-                ztreeView.setpId(Long.valueOf(resource.getParentResource().getId()));
+                ztreeView.setPId(Long.valueOf(resource.getParentResource().getId()));
             }
             ztreeView.setName(resource.getName());
             if (allRoleResourceList != null && allRoleResourceList.contains(resource)) {
@@ -97,11 +98,7 @@ public class ResourceServiceImpl implements ResourceService {
             }
             ztreeViewList.add(ztreeView);
         }
-        List<ZtreeView> resultZtreeViewList = ztreeViewList.stream()
-                .sorted(comparing(ZtreeView::getpId))
-                .collect(Collectors.toList());
-        resultZtreeViewList.add(0,new ZtreeView(0L, null, "系统菜单", true));
-        return resultZtreeViewList;
+        return ztreeViewList;
     }
 
     private List<Resource> getParentResource(List<Resource> resourceList){

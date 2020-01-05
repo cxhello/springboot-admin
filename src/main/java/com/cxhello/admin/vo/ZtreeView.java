@@ -28,12 +28,4 @@ public class ZtreeView {
         this.name = name;
         this.open = open;
     }
-
-    public Long getpId() {
-        return pId;
-    }
-
-    public void setpId(Long pId) {
-        this.pId = pId;
-    }
 }
