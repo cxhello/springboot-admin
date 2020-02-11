@@ -53,4 +53,11 @@ public interface RoleService {
      * @return
      */
     List<Resource> selectRoleResources(Integer id);
+
+    /**
+     * 给角色分配资源
+     * @param id
+     * @param resourceIds
+     */
+    void grant(Integer id, String[] resourceIds);
 }

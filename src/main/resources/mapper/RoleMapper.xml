@@ -40,4 +40,12 @@
         </where>
     </select>
 
+    <insert id="grant">
+        insert into tb_role_resource (role_id,resource_id) values (#{roleId},#{resourceId})
+    </insert>
+
+    <delete id="deleteRoleResources" parameterType="integer">
+         delete from tb_role_resource where role_id = #{id}
+    </delete>
+
 </mapper>

@@ -15,4 +15,8 @@ public interface RoleDao extends Mapper<Role> {
     List<Role> findAllByLikeName(@Param("searchText") String searchText);
 
     List<Resource> selectRoleResources(@Param("id")Integer id);
+
+    void grant(@Param("roleId") Integer id, @Param("resourceId")Integer rid);
+
+    void deleteRoleResources(Integer id);
 }

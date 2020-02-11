@@ -9,14 +9,12 @@ import com.cxhello.admin.vo.ZtreeView;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import static java.util.Comparator.comparing;
 
 /**
  * @author CaiXiaoHui
@@ -29,6 +27,7 @@ public class ResourceServiceImpl implements ResourceService {
     private ResourceDao resourceDao;
 
     @Autowired
+    @Lazy
     private RoleService roleService;
 
     @Override

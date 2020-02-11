@@ -8,6 +8,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import java.util.Date;
 import java.util.List;
@@ -66,5 +68,26 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Resource> selectRoleResources(Integer id) {
         return roleDao.selectRoleResources(id);
+    }
+
+    @Override
+    @Transactional
+    public void grant(Integer id, String[] resourceIds) {
+        Role role = selectRoleById(id);
+        Assert.notNull(role, "角色不存在");
+        Assert.state(!"administrator".equals(role.getRoleKey()),"超级管理员角色不能进行资源分配");
+        List<Resource> resourceList = selectRoleResources(id);
+        if (resourceList != null && resourceList.size() > 0) {
+            roleDao.deleteRoleResources(id);
+        }
+        if (resourceIds != null && resourceIds.length > 0) {
+            for (String resourceId : resourceIds) {
+                if ("".equals(resourceId) || "0".equals(resourceId)) {
+                    continue;
+                }
+                Integer rid = Integer.parseInt(resourceId);
+                roleDao.grant(role.getId(),rid);
+            }
+        }
     }
 }

@@ -85,4 +85,16 @@ public class RoleController {
         model.addAttribute("role", role);
         return "admin/role/grant";
     }
+
+    @RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultData grant(@PathVariable Integer id, String[] resourceIds) {
+        try {
+            roleService.grant(id,resourceIds);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            return ResultUtils.getMsg(e.getMessage());
+        }
+        return ResultUtils.getMsg("操作成功");
+    }
 }
