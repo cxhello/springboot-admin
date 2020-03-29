@@ -25,7 +25,7 @@ start(){
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is already running. pid=${pid} ."
   else
-    nohup java -jar /export/App/$APP_NAME > /export/App/springboot-admin.log 2>&1 &
+    nohup java -jar /export/Apps/springboot-admin/$APP_NAME > /export/Apps/springboot-admin/springboot-admin.log 2>&1 &
     echo "${APP_NAME} start success"
   fi
 }
