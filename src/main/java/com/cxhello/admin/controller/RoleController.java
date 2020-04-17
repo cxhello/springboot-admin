@@ -3,7 +3,7 @@ package com.cxhello.admin.controller;
 import com.cxhello.admin.entity.Resource;
 import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.service.RoleService;
-import com.cxhello.admin.utils.ResultData;
+import com.cxhello.admin.utils.Result;
 import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
@@ -53,7 +53,7 @@ public class RoleController {
 
     @RequestMapping(value = "/edit")
     @ResponseBody
-    public ResultData edit(Role role){
+    public Result edit(Role role){
         try {
             roleService.saveOrUpdate(role);
         } catch (Exception e) {
@@ -65,7 +65,7 @@ public class RoleController {
 
     @RequestMapping("/delete/{id}")
     @ResponseBody
-    public ResultData delete(@PathVariable("id") Integer id){
+    public Result delete(@PathVariable("id") Integer id){
         try {
             roleService.delete(id);
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class RoleController {
 
     @RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData grant(@PathVariable Integer id, String[] resourceIds) {
+    public Result grant(@PathVariable Integer id, String[] resourceIds) {
         try {
             roleService.grant(id,resourceIds);
         } catch (Exception e) {

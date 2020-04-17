@@ -4,7 +4,7 @@ import com.cxhello.admin.entity.Role;
 import com.cxhello.admin.entity.User;
 import com.cxhello.admin.service.RoleService;
 import com.cxhello.admin.service.UserService;
-import com.cxhello.admin.utils.ResultData;
+import com.cxhello.admin.utils.Result;
 import com.cxhello.admin.utils.ResultUtils;
 import com.github.pagehelper.PageInfo;
 import org.apache.logging.log4j.LogManager;
@@ -60,7 +60,7 @@ public class UserController {
 
     @RequestMapping(value = "/edit")
     @ResponseBody
-    public ResultData edit(User user){
+    public Result edit(User user){
         try {
             userService.saveOrUpdate(user);
         } catch (Exception e) {
@@ -72,7 +72,7 @@ public class UserController {
 
     @RequestMapping("/delete/{id}")
     @ResponseBody
-    public ResultData delete(@PathVariable("id") Integer id){
+    public Result delete(@PathVariable("id") Integer id){
         try {
             userService.delete(id);
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class UserController {
 
     @RequestMapping(value = "/grant/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData grant(@PathVariable Integer id, String[] roleIds) {
+    public Result grant(@PathVariable Integer id, String[] roleIds) {
         try{
             userService.grant(id,roleIds);
         }catch (Exception e){
@@ -117,7 +117,7 @@ public class UserController {
 
     @RequestMapping(value = "/updatePwd", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData updatePwd(String oldPassword, String password1, String password2){
+    public Result updatePwd(String oldPassword, String password1, String password2){
         try {
             Subject subject = SecurityUtils.getSubject();
             Object principal = subject.getPrincipal();

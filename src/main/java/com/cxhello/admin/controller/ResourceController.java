@@ -2,7 +2,7 @@ package com.cxhello.admin.controller;
 
 import com.cxhello.admin.entity.Resource;
 import com.cxhello.admin.service.ResourceService;
-import com.cxhello.admin.utils.ResultData;
+import com.cxhello.admin.utils.Result;
 import com.cxhello.admin.utils.ResultUtils;
 import com.cxhello.admin.vo.ZtreeView;
 import com.github.pagehelper.PageInfo;
@@ -67,7 +67,7 @@ public class ResourceController {
 
     @RequestMapping(value = "/edit")
     @ResponseBody
-    public ResultData edit(Resource resource){
+    public Result edit(Resource resource){
         try {
             resourceService.saveOrUpdate(resource);
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class ResourceController {
 
     @RequestMapping("/delete/{id}")
     @ResponseBody
-    public ResultData delete(@PathVariable("id") Integer id){
+    public Result delete(@PathVariable("id") Integer id){
         try {
             resourceService.delete(id);
         } catch (Exception e) {

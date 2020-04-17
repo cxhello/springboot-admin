@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * @author CaiXiaoHui
+ * @author cxhello
  * @create 2019/11/6 16:59
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ResultData<T> {
+public class Result<T> {
 
     private Integer code;
 
@@ -20,15 +20,15 @@ public class ResultData<T> {
 
     private T data;
 
-    public ResultData(Integer code){
+    public Result(Integer code){
         this.code = code;
     }
 
-    public ResultData(String msg){
+    public Result(String msg){
         this.msg = msg;
     }
 
-    public ResultData(Integer code,String msg){
+    public Result(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
     }

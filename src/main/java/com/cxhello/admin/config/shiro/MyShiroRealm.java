@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @author CaiXiaoHui
+ * @author cxhello
  * @create 2019/11/18 15:14
  */
 public class MyShiroRealm extends AuthorizingRealm {

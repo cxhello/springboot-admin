@@ -7,7 +7,7 @@ import com.github.pagehelper.PageInfo;
 import java.util.List;
 
 /**
- * @author CaiXiaoHui
+ * @author cxhello
  * @create 2019/11/12 20:34
  */
 public interface ResourceService {

@@ -1,10 +1,10 @@
 package com.cxhello.admin.utils;
 
 /**
- * @author CaiXiaoHui
+ * @author cxhello
  * @create 2019/11/7 10:01
  */
-public enum StatusCode {
+public enum StatusCodeEnum {
 
     SUCCESS(200,"SUCCESS"),//成功
     FAIL(400,"FAIL"),//失败
@@ -31,7 +31,7 @@ public enum StatusCode {
         this.msg = msg;
     }
 
-    StatusCode(Integer code, String msg){
+    StatusCodeEnum(Integer code, String msg){
         this.code = code;
         this.msg = msg;
     }

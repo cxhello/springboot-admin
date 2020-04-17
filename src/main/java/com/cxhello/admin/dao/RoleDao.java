@@ -8,7 +8,7 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 /**
- * @author CaiXiaoHui
+ * @author cxhello
  * @create 2019/11/11 20:44
  */
 public interface RoleDao extends Mapper<Role> {
