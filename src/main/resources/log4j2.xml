@@ -35,7 +35,7 @@
         </RollingFile>
 
         <RollingFile name="druidSql" fileName="${LOG_HOME}/druidSql.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/druidSql-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -45,7 +45,7 @@
         </RollingFile>
 
         <RollingFile name="shiro" fileName="${LOG_HOME}/shiro.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/shiro-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -55,7 +55,7 @@
         </RollingFile>
 
         <RollingFile name="hibernate" fileName="${LOG_HOME}/hibernate.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/hibernate-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -65,7 +65,7 @@
         </RollingFile>
 
         <RollingFile name="thymeleaf" fileName="${LOG_HOME}/thymeleaf.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/thymeleaf-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -75,11 +75,21 @@
         </RollingFile>
 
         <RollingFile name="mybatis" fileName="${LOG_HOME}/mybatis.log"
-                     filePattern="${log_home}/$${date:yyyy-MM-dd}/mybatis-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/mybatis-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
                 <SizeBasedTriggeringPolicy size="100MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="common-all" fileName="${LOG_HOME}/common-all.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/common-all-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
             </Policies>
             <DefaultRolloverStrategy max="5"/>
         </RollingFile>
@@ -88,25 +98,26 @@
     <Loggers>
         <Root level="DEBUG">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="common-all"/>
         </Root>
 
-        <AsyncLogger name="org.springframework" level="Error">
+        <AsyncLogger name="org.springframework" level="error">
             <AppenderRef ref="spring"/>
         </AsyncLogger>
 
-        <AsyncLogger name="com.cxhello.admin.dao" level="Debug">
+        <AsyncLogger name="com.cxhello.admin.dao" level="debug">
             <AppenderRef ref="sql"/>
         </AsyncLogger>
 
-        <AsyncLogger name="druid.sql" level="Error">
+        <AsyncLogger name="druid.sql" level="error">
             <AppenderRef ref="druidSql"/>
         </AsyncLogger>
 
-        <AsyncLogger name="org.apache.shiro" level="Error">
+        <AsyncLogger name="org.apache.shiro" level="error">
             <AppenderRef ref="shiro"/>
         </AsyncLogger>
 
-        <AsyncLogger name="org.hibernate.validator" level="Error">
+        <AsyncLogger name="org.hibernate.validator" level="error">
             <AppenderRef ref="hibernate"/>
         </AsyncLogger>
 

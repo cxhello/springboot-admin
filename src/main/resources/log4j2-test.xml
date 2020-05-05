@@ -35,7 +35,7 @@
         </RollingFile>
 
         <RollingFile name="druidSql" fileName="${LOG_HOME}/druidSql.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/druidSql-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -45,7 +45,7 @@
         </RollingFile>
 
         <RollingFile name="shiro" fileName="${LOG_HOME}/shiro.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/shiro-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -55,7 +55,7 @@
         </RollingFile>
 
         <RollingFile name="hibernate" fileName="${LOG_HOME}/hibernate.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/hibernate-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -65,7 +65,7 @@
         </RollingFile>
 
         <RollingFile name="thymeleaf" fileName="${LOG_HOME}/thymeleaf.log"
-                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/sql-%d{yyyyMMdd}-%i.log.gz">
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/thymeleaf-%d{yyyyMMdd}-%i.log.gz">
             <PatternLayout pattern="${patternLayout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
@@ -83,30 +83,41 @@
             </Policies>
             <DefaultRolloverStrategy max="5"/>
         </RollingFile>
+
+        <RollingFile name="common-all" fileName="${LOG_HOME}/common-all.log"
+                     filePattern="${LOG_HOME}/$${date:yyyy-MM-dd}/common-all-%d{yyyyMMdd}-%i.log.gz">
+            <PatternLayout pattern="${patternLayout}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
         <Root level="DEBUG">
             <AppenderRef ref="Console"/>
+            <AppenderRef ref="common-all"/>
         </Root>
 
-        <Logger name="org.springframework" level="Error">
+        <Logger name="org.springframework" level="error">
             <AppenderRef ref="spring"/>
         </Logger>
 
-        <Logger name="com.cxhello.admin.dao" level="Debug">
+        <Logger name="com.cxhello.admin.dao" level="debug">
             <AppenderRef ref="sql"/>
         </Logger>
 
-        <Logger name="druid.sql" level="Error">
+        <Logger name="druid.sql" level="error">
             <AppenderRef ref="druidSql"/>
         </Logger>
 
-        <Logger name="org.apache.shiro" level="Error">
+        <Logger name="org.apache.shiro" level="error">
             <AppenderRef ref="shiro"/>
         </Logger>
 
-        <Logger name="org.hibernate.validator" level="Error">
+        <Logger name="org.hibernate" level="error">
             <AppenderRef ref="hibernate"/>
         </Logger>
 
