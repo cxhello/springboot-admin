@@ -16,7 +16,7 @@ public class SpringbootAdminApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringbootAdminApplication.class, args);
-        logger.debug("启动成功");
+        logger.info("启动成功");
     }
 
 }
