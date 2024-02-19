@@ -5,7 +5,7 @@ FROM eclipse-temurin:8u402-b06-jdk-centos7
 MAINTAINER cxhello
 
 # 将指定目录下的jar包复制到docker容器的/目录下
-COPY springboot-admin-0.0.1-SNAPSHOT.jar /export/Apps/springboot-admin/springboot-admin-0.0.1-SNAPSHOT.jar
+COPY target/springboot-admin-0.0.1-SNAPSHOT.jar /export/Apps/springboot-admin/springboot-admin-0.0.1-SNAPSHOT.jar
 
 # 声明服务运行在8080端口
 EXPOSE 8080
