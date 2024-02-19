@@ -1,5 +1,5 @@
 # 该镜像需要依赖的基础镜像
-FROM java:8
+FROM eclipse-temurin:8u402-b06-jdk-centos7
 
 # 指定维护者的名字
 MAINTAINER cxhello
