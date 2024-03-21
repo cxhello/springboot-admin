@@ -12,15 +12,22 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.1.RELEASE</version>
+        <version>2.6.15</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
 
     <properties>
         <java.version>1.8</java.version>
         <skipTests>true</skipTests>
+        <mapper-spring-boot-starter.version>4.2.3</mapper-spring-boot-starter.version>
+        <pagehelper-spring-boot-starter.version>1.4.6</pagehelper-spring-boot-starter.version>
+        <druid-spring-boot-starter.version>1.2.22</druid-spring-boot-starter.version>
+        <fastjson.version>1.2.83</fastjson.version>
+        <shiro-spring.version>1.12.0</shiro-spring.version>
+        <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
+        <disruptor.version>3.3.7</disruptor.version>
     </properties>
+
 
     <dependencies>
         <dependency>
@@ -54,31 +61,30 @@
         <dependency>
             <groupId>tk.mybatis</groupId>
             <artifactId>mapper-spring-boot-starter</artifactId>
-            <version>2.0.1</version>
+            <version>${mapper-spring-boot-starter.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.2.5</version>
+            <version>${pagehelper-spring-boot-starter.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-starter</artifactId>
-            <version>1.2.6</version>
+            <version>${druid-spring-boot-starter.version}</version>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.83</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
         <dependency>
@@ -90,12 +96,13 @@
         <dependency>
             <groupId>org.apache.shiro</groupId>
             <artifactId>shiro-spring</artifactId>
-            <version>1.7.1</version>
+            <version>${shiro-spring.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.theborakompanioni</groupId>
             <artifactId>thymeleaf-extras-shiro</artifactId>
-            <version>2.0.0</version>
+            <version>${thymeleaf-extras-shiro.version}</version>
         </dependency>
 
         <dependency>
@@ -106,9 +113,8 @@
         <dependency>
             <groupId>com.lmax</groupId>
             <artifactId>disruptor</artifactId>
-            <version>3.3.7</version>
+            <version>${disruptor.version}</version>
         </dependency>
-
     </dependencies>
 
     <build>
