@@ -21,6 +21,7 @@ services:
     container_name: mysql
     hostname: mysql
     environment:
+      - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=123456
     ports:
       - "23306:3306"
