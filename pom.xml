@@ -5,7 +5,7 @@
 
     <groupId>com.cxhello</groupId>
     <artifactId>springboot-admin</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>springboot-admin</name>
     <description>Demo project for Spring Boot</description>
 
@@ -51,6 +51,11 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <dependency>

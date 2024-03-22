@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+  springboot-admin:
+    image: ghcr.io/cxhello/springboot-admin:v1.0.0
+    container_name: springboot-admin
+    hostname: springboot-admin
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/actuator/health/readiness" ]
+      interval: 10s
+      timeout: 20s
+      retries: 10
+    restart: unless-stopped
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    hostname: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - "23306:3306"
+    volumes:
+      - ../sql:/docker-entrypoint-initdb.d
+      - ./mysql:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+    restart: unless-stopped
+
+networks:
+  default:

@@ -75,6 +75,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
+        filterChainDefinitionMap.put("/actuator/**", "anon");
         //登录路径
         filterChainDefinitionMap.put("/login", "anon");
         List<Resource> resourceList = resourceService().findAll();

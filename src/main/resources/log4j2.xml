@@ -4,7 +4,7 @@
         <!-- 应用名称：和统一配置中的项目代码保持一致（小写） -->
         <property name="APP_NAME" value="springboot-admin" />
         <!-- 应用日志文件保存路径 -->
-        <property name="LOG_HOME" value="/export/Logs/${APP_NAME}" />
+        <property name="LOG_HOME" value="logs" />
         <property name="patternLayout">%-d{yyyy-MM-dd HH:mm:ss} [%p] [%t] - %c.%M():%L - %m%n</property>
     </properties>
 

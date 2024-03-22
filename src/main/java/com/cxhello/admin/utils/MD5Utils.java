@@ -36,7 +36,7 @@ public class MD5Utils {
      * @return string
      */
     public static String generatePasswordMD5(String input, String salt) {
-        if(StringUtils.isEmpty(salt)) {
+        if (!StringUtils.hasLength(salt)) {
             salt = "";
         }
         return md5(salt + md5(input));

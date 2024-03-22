@@ -1,6 +1,6 @@
 #!/bin/bash
 #这里可替换为你自己的执行程序，其他代码无需更改
-APP_NAME=springboot-admin-0.0.1-SNAPSHOT.jar
+APP_NAME=springboot-admin-1.0.0.jar
  
 #使用说明，用来提示输入参数
 usage() {
@@ -25,7 +25,7 @@ start(){
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is already running. pid=${pid} ."
   else
-    nohup /opt/jdk1.8.0_152/bin/java -jar /export/Apps/springboot-admin/$APP_NAME > /export/Apps/springboot-admin/springboot-admin.log 2>&1 &
+    nohup /opt/jdk1.8.0_152/bin/java -jar /data/springboot-admin/$APP_NAME > /data/springboot-admin/springboot-admin.log 2>&1 &
     echo "${APP_NAME} start success"
   fi
 }
