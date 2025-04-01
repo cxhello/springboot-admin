@@ -19,3 +19,13 @@ docker-compose up -d
 ```shell
 docker build -t springboot-admin:v1.0.0 .
 ```
+
+## Star History
+
+<a href="https://star-history.com/#cxhello/springboot-admin&Date">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=cxhello/springboot-admin&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=cxhello/springboot-admin&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=cxhello/springboot-admin&type=Date" />
+ </picture>
+</a>
