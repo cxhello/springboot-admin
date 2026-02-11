@@ -23,7 +23,7 @@
         <pagehelper-spring-boot-starter.version>1.4.6</pagehelper-spring-boot-starter.version>
         <druid-spring-boot-starter.version>1.2.22</druid-spring-boot-starter.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <shiro-spring.version>1.12.0</shiro-spring.version>
+        <shiro-spring.version>2.1.0</shiro-spring.version>
         <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
         <disruptor.version>3.3.7</disruptor.version>
     </properties>
